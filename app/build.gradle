@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.uwantolearn.rapidapiassignment"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -23,15 +24,41 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.ext.kotlin_version"
+    implementation "androidx.appcompat:appcompat:$rootProject.ext.appCompat"
+    implementation "androidx.core:core-ktx:$rootProject.ext.coreKtx"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.archComponentsVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.ext.archComponentsVersion"
+    implementation "androidx.room:room-runtime:$rootProject.ext.room"
+    implementation "androidx.paging:paging-runtime:$rootProject.ext.pagingVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.ext.archComponentsVersion"
+    kapt "androidx.room:room-compiler:$rootProject.ext.room"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.gsonConverter"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.rxJavaAdapter"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.loggingInterceptor"
+
+    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
+    api "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlin"
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
+
+    api "com.google.dagger:dagger:$rootProject.ext.dagger2"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger2"
+
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.extJunit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoCore"
+
 }
