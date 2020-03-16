@@ -50,15 +50,18 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.rxJavaAdapter"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.loggingInterceptor"
 
-    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
-    api "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlin"
-    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxJava"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlin"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
 
-    api "com.google.dagger:dagger:$rootProject.ext.dagger2"
+    implementation "com.google.dagger:dagger:$rootProject.ext.dagger2"
     kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger2"
 
     testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation 'com.jraska.livedata:testing-ktx:1.1.1'
     androidTestImplementation "androidx.test.ext:junit:$rootProject.extJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoCore"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.ext.coreTesting"
+
 
 }
