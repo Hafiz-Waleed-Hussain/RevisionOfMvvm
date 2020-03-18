@@ -5,7 +5,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.jraska.livedata.test
 import com.uwantolearn.rapidapiassignment.database.RapidImageDatabase
 import com.uwantolearn.rapidapiassignment.model.RapidImage
 import com.uwantolearn.rapidapiassignment.model.RapidImageQuery
@@ -35,7 +34,7 @@ class RapidImageDAOTest {
             .allowMainThreadQueries()
             .build()
 
-        dao = database.images()
+        dao = database.imagesDAO()
     }
 
     @Test

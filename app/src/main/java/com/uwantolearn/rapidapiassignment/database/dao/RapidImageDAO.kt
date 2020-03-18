@@ -1,6 +1,7 @@
 package com.uwantolearn.rapidapiassignment.database.dao
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.uwantolearn.rapidapiassignment.model.RapidImage
 import com.uwantolearn.rapidapiassignment.model.RapidImageQuery
@@ -13,10 +14,10 @@ interface RapidImageDAO {
 
     @Transaction
     @Query("SELECT * FROM imagesQuery WHERE query=:queryString")
-    fun loadImages(queryString: String): LiveData<List<RapidImagesAgainstQuery>>
+    fun loadImages(queryString: String): DataSource.Factory<Int, RapidImagesAgainstQuery>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg rapidImageEntity: RapidImage)
+    fun insert(rapidImageEntity: List<RapidImage>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(rapidQuery: RapidImageQuery)
