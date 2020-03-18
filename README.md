@@ -16,3 +16,8 @@ Integrated Architecture
 
 For now, we are using a mock Data from a RemoteDataSource.
 
+## Testing
+
+Integration Testing for Room is available in androidTest folder
+
+Unit Tests for LocalDataSource is available in test folder
