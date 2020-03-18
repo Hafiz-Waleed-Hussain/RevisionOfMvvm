@@ -6,7 +6,6 @@ import androidx.paging.PagedList
 import com.uwantolearn.rapidapiassignment.data.source.remote.RemoteRapidApi
 import com.uwantolearn.rapidapiassignment.database.LocalRapidApi
 import com.uwantolearn.rapidapiassignment.model.RapidImage
-import com.uwantolearn.rapidapiassignment.model.RapidImagesAgainstQuery
 import io.reactivex.disposables.CompositeDisposable
 
 class RapidApiBoundaryCallback(
@@ -14,7 +13,7 @@ class RapidApiBoundaryCallback(
     private val remoteRapidApi: RemoteRapidApi,
     private val localRapidApi: LocalRapidApi,
     private val compositeDisposable: CompositeDisposable
-) : PagedList.BoundaryCallback<RapidImagesAgainstQuery>() {
+) : PagedList.BoundaryCallback<RapidImage>() {
 
     private var lastDownloadedPageNumber = 1
     private var isDownloding = false
@@ -27,7 +26,7 @@ class RapidApiBoundaryCallback(
         downloadDataAndSave(query)
     }
 
-    override fun onItemAtEndLoaded(itemAtEnd: RapidImagesAgainstQuery) {
+    override fun onItemAtEndLoaded(itemAtEnd: RapidImage) {
         downloadDataAndSave(query)
     }
 

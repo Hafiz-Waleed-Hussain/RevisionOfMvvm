@@ -6,32 +6,25 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.uwantolearn.rapidapiassignment.database.dao.RapidImageDAO
 import com.uwantolearn.rapidapiassignment.model.RapidImage
-import com.uwantolearn.rapidapiassignment.model.RapidImageQuery
-import com.uwantolearn.rapidapiassignment.model.RapidImagesAgainstQuery
 
-@Database(
-    entities = [RapidImage::class, RapidImageQuery::class],
-    version = 1
-)
+@Database(entities = [RapidImage::class], version = 1)
 abstract class RapidImageDatabase : RoomDatabase() {
     abstract fun imagesDAO(): RapidImageDAO
 
     companion object {
-
         @Volatile
         private var INSTANCE: RapidImageDatabase? = null
 
         fun getInstance(context: Context): RapidImageDatabase =
             INSTANCE ?: synchronized(this) {
-                INSTANCE
-                    ?: buildDatabase(context).also { INSTANCE = it }
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
-                RapidImageDatabase::class.java, "RapidAPI.db"
-            )
-                .build()
+                RapidImageDatabase::class.java,
+                "RapidAPI.db"
+            ).build()
     }
 }

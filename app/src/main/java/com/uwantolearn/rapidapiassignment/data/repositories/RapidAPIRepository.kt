@@ -7,8 +7,6 @@ import com.uwantolearn.rapidapiassignment.data.RapidApiBoundaryCallback
 import com.uwantolearn.rapidapiassignment.data.source.remote.RemoteRapidApi
 import com.uwantolearn.rapidapiassignment.database.LocalRapidApi
 import com.uwantolearn.rapidapiassignment.model.RapidImage
-import com.uwantolearn.rapidapiassignment.model.RapidImagesAgainstQuery
-import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -34,6 +32,6 @@ class RapidAPIRepository @Inject constructor(
 }
 
 data class Result(
-    val success: LiveData<PagedList<RapidImagesAgainstQuery>>,
+    val success: LiveData<PagedList<RapidImage>>,
     val error: LiveData<Throwable>
 )

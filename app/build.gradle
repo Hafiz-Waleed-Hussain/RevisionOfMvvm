@@ -59,7 +59,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$rootProject.ext.dagger2"
     kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger2"
 
-    testImplementation "junit:junit:$rootProject.junit"
+    testImplementation "junit:junit:$rootProject.ext.junit"
+    testImplementation "com.nhaarman:mockito-kotlin:$rootProject.mockito"
     androidTestImplementation 'com.jraska.livedata:testing-ktx:1.1.1'
     androidTestImplementation "androidx.test.ext:junit:$rootProject.extJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoCore"

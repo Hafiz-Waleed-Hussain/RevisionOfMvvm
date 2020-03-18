@@ -3,15 +3,16 @@ package com.uwantolearn.rapidapiassignment.database.dao
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
+import androidx.room.paging.LimitOffsetDataSource
+import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.uwantolearn.rapidapiassignment.database.RapidImageDatabase
 import com.uwantolearn.rapidapiassignment.model.RapidImage
-import com.uwantolearn.rapidapiassignment.model.RapidImageQuery
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import junit.framework.Assert.assertTrue
+import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.`is`
+import org.junit.*
 import org.junit.runner.RunWith
 
 
@@ -22,7 +23,6 @@ class RapidImageDAOTest {
     var instantTaskExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var database: RapidImageDatabase
-
     private lateinit var dao: RapidImageDAO
 
     @Before
@@ -39,37 +39,51 @@ class RapidImageDAOTest {
 
     @Test
     fun when_there_is_no_data_against_query_should_return_empty() {
-        dao.loadImages("")
-            .test()
-            .assertHasValue()
-            .assertValue { it.isEmpty() }
+        loadDataFromDB("cat")
+            .isEmpty()
+            .let(::assertTrue)
     }
 
     @Test
     fun insert_one_data_object_against_query_should_return_only_one_data() {
-        val query = RapidImageQuery("cat")
         val firstImage = RapidImage(id = 1, againstQuery = "cat")
-        dao.insert(query)
-        dao.insert(firstImage)
+        val secondImage = RapidImage(id = 2, againstQuery = "dog")
+        dao.insert(listOf(firstImage, secondImage))
 
-        dao.loadImages("cat")
-            .test()
-            .assertHasValue()
-            .assertValue { it[0].images.size == 1 }
+        loadDataFromDB("cat")
+            .size
+            .let { assertThat(it, `is`(CoreMatchers.equalTo(1))) }
     }
-
 
     @Test
     fun insert_batch_of_data_and_load_all_should_return_all_data() {
-        val query = RapidImageQuery("cat")
-        val list = Array(13) { RapidImage(id = it.toLong(), againstQuery = "cat") }
-        dao.insert(query)
-        dao.insert(*list)
+        Array(13) { RapidImage(id = (it+1).toLong(), againstQuery = "cat") }
+            .toList()
+            .let(dao::insert)
 
-        dao.loadImages("cat")
-            .test()
-            .assertHasValue()
-            .assertValue { it[0].images.size == 12 }
+        loadDataFromDB("cat")
+            .size
+            .let { assertThat(it, `is`(CoreMatchers.equalTo(13))) }
+    }
+
+    @Test
+    fun insert_data_against_different_queries_and_then_validate_query_should_return_against_query() {
+        val catImages = Array(8) { RapidImage(id = (it+1).toLong(), againstQuery = "cat") }
+        val dogImages = Array(5) { RapidImage(id = (it + 10).toLong(), againstQuery = "dog") }
+        val cowImages = Array(3) { RapidImage(id = (it + 20).toLong(), againstQuery = "cow") }
+
+        (catImages + dogImages + cowImages).toList()
+            .let(dao::insert)
+
+        loadDataFromDB("cat")
+            .size
+            .let { assertThat(it, `is`(CoreMatchers.equalTo(8))) }
+        loadDataFromDB("dog")
+            .size
+            .let { assertThat(it, `is`(CoreMatchers.equalTo(5))) }
+        loadDataFromDB("cow")
+            .size
+            .let { assertThat(it, `is`(CoreMatchers.equalTo(3))) }
     }
 
 
@@ -79,4 +93,7 @@ class RapidImageDAOTest {
         database.close()
     }
 
+    private fun loadDataFromDB(query: String) =
+        (dao.loadImages(query).create() as LimitOffsetDataSource)
+            .loadRange(0, 100)
 }

@@ -14,7 +14,6 @@ interface AppComponent {
     fun rapidAPIRepository(): RapidAPIRepository
 }
 
-
 @Module(
     includes = [
         RetrofitModule::class,
@@ -22,6 +21,7 @@ interface AppComponent {
         RapidApiDataSourceModule::class
     ]
 )
+
 class AppModule(private val context: Context) {
 
     @Singleton

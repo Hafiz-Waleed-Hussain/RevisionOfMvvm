@@ -3,12 +3,11 @@ package com.uwantolearn.rapidapiassignment.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.uwantolearn.rapidapiassignment.factories.ViewModelFactory
-import com.uwantolearn.rapidapiassignment.view.home.HomeViewModel
+import com.uwantolearn.rapidapiassignment.feature.home.HomeViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import javax.inject.Singleton
 import kotlin.reflect.KClass
 
 @Target(

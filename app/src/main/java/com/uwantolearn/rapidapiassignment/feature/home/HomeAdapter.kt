@@ -1,18 +1,16 @@
-package com.uwantolearn.rapidapiassignment.view.home
+package com.uwantolearn.rapidapiassignment.feature.home
 
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.uwantolearn.rapidapiassignment.R
 import com.uwantolearn.rapidapiassignment.extensions.inflate
 import com.uwantolearn.rapidapiassignment.model.RapidImage
-import com.uwantolearn.rapidapiassignment.model.RapidImagesAgainstQuery
 import javax.inject.Inject
 
 class HomeAdapter @Inject constructor() :
-    PagedListAdapter<RapidImagesAgainstQuery, RecyclerView.ViewHolder>(diffUtilImpl) {
+    PagedListAdapter<RapidImage, RecyclerView.ViewHolder>(diffUtilImpl) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         parent.inflate(R.layout.cell_image).let(::HomeViewHolder)
@@ -22,15 +20,14 @@ class HomeAdapter @Inject constructor() :
     }
 }
 
-private val diffUtilImpl = object : DiffUtil.ItemCallback<RapidImagesAgainstQuery>() {
+private val diffUtilImpl = object : DiffUtil.ItemCallback<RapidImage>() {
     override fun areItemsTheSame(
-        oldItem: RapidImagesAgainstQuery,
-        newItem: RapidImagesAgainstQuery
-    ): Boolean = oldItem == newItem
+        oldItem: RapidImage,
+        newItem: RapidImage
+    ): Boolean = oldItem.id == newItem.id
 
     override fun areContentsTheSame(
-        oldItem: RapidImagesAgainstQuery,
-        newItem: RapidImagesAgainstQuery
+        oldItem: RapidImage,
+        newItem: RapidImage
     ): Boolean = oldItem == newItem
-
 }
