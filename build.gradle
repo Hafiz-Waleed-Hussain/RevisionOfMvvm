@@ -30,6 +30,7 @@ buildscript {
     ext.androidTestRunner = '1.0.2'
     ext.espressoCore = '3.2.0'
     ext.coreTesting = '2.0.1'
+    ext.glide = '4.11.0'
 
 
 

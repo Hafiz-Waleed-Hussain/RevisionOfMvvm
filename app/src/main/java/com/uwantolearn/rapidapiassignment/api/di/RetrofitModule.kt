@@ -24,6 +24,7 @@ class RetrofitModule(
     private val headerKey: String
 ) {
 
+    @Singleton
     @Provides
     internal fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(url)
@@ -32,6 +33,7 @@ class RetrofitModule(
         .client(okHttpClient)
         .build()
 
+    @Singleton
     @Provides
     internal fun provideOkHttpClient(
         @Named("loggingInterceptor") loggingInterceptor: Interceptor,

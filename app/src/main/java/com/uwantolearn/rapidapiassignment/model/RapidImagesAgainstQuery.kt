@@ -10,5 +10,5 @@ data class RapidImagesAgainstQuery(
         parentColumn = "query",
         entityColumn = "againstQuery"
     )
-    val images: List<RapidImage>
+    val image: RapidImage
 )

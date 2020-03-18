@@ -15,7 +15,13 @@ interface AppComponent {
 }
 
 
-@Module(includes = [RetrofitModule::class, AppExecutorModule::class, RapidApiDataSourceModule::class])
+@Module(
+    includes = [
+        RetrofitModule::class,
+        AppExecutorModule::class,
+        RapidApiDataSourceModule::class
+    ]
+)
 class AppModule(private val context: Context) {
 
     @Singleton

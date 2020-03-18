@@ -40,6 +40,7 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.ext.archComponentsVersion"
     implementation "androidx.lifecycle:lifecycle-runtime:$rootProject.ext.archComponentsVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.ext.archComponentsVersion"
     implementation "androidx.room:room-runtime:$rootProject.ext.room"
     implementation "androidx.paging:paging-runtime:$rootProject.ext.pagingVersion"
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.ext.archComponentsVersion"
@@ -54,6 +55,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.ext.rxKotlin"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroid"
 
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glide"
     implementation "com.google.dagger:dagger:$rootProject.ext.dagger2"
     kapt "com.google.dagger:dagger-compiler:$rootProject.ext.dagger2"
 
